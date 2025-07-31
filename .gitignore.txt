@@ -1,0 +1,24 @@
+# Python specific ignores
+__pycache__/
+*.pyc
+*.pyd
+.Python/
+.ipynb_checkpoints/
+.mypy_cache/
+.pytest_cache/
+.vscode/
+
+# Environment ignores (if you create local environments inside project)
+venv/
+env/
+conda_env/
+
+# Common OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files (already handled by LFS, but good to list)
+*.log
+*.tmp
+*.bak
+
