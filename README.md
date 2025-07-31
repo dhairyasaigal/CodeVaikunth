@@ -71,59 +71,6 @@ The model now performs well across all three objects, demonstrating significantl
 
 ---
 
-## 3. How to Reproduce Our Results
-
-Follow these steps to reproduce our enhanced model training and evaluation.
-
-### 3.1. Prerequisites & Environment Setup
-
-* Ensure Anaconda/Miniconda and Python 3.8+ are installed.
-* Download and extract the Duality AI Hackathon dataset.
-* **Crucially, adjust `DATASET_BASE_PATH` in `final_augment_yolo_data.py` to your project's root directory.**
-* From your project's `ENV_SETUP` folder, run `setup_env.bat` (Windows) or your equivalent `setup_env.sh` (Mac/Linux).
-* Activate the `EDU` environment: `conda activate EDU`
-* Install additional libraries: `pip install opencv-python albumentations tqdm ultralytics`
-
-### 3.2. Generate Augmented Dataset
-
-1.  Navigate to your project's root directory: `cd [Your_Project_Path]/HackByte_Dataset`
-2.  Run the advanced augmentation script:
-    ```bash
-    python final_augment_yolo_data.py
-    ```
-    This will create `train_final_augmented/images` and `train_final_augmented/labels` directories with your new dataset.
-
-3.  **Update `data.yaml`:**
-    * Open your `data.yaml` (e.g., `[Your_Project_Path]/HackByte_Dataset/data/data.yaml`).
-    * Modify the `train:` path to point to the new augmented data:
-        ```yaml
-        train: ../train_final_augmented/images # Adjust path relative to data.yaml
-        val: ../data/val/images
-        test: ../data/test/images
-        ```
-
-### 3.3. Train the Model
-
-1.  Navigate to your training scripts directory (e.g., `[Your_Project_Path]/HackByte_Dataset/training_scripts_dir`).
-2.  Activate environment: `conda activate EDU`
-3.  Run the training command. We recommend using a larger model for better performance:
-    ```bash
-    python train.py --img 640 --batch -1 --epochs 150 --data [Relative_Path_To_Your_Data.yaml] --model yolov8m.pt --name my_final_enhanced_model
-    ```
-    *(Adjust `[Relative_Path_To_Your_Data.yaml]` and consider increasing `epochs` further if needed.)*
-
-### 3.4. Evaluate the Model
-
-1.  Navigate to your training scripts directory.
-2.  Activate environment: `conda activate EDU`
-3.  Run the prediction script:
-    ```bash
-    python predict.py --source [Path_To_Your_Test_Images] --weights [Path_To_Your_Best_Model.pt] --conf 0.25 --iou 0.45 --name final_evaluation_results
-    ```
-    *(Replace `[Path_To_Your_Test_Images]` with your `data/test/images` path, and `[Path_To_Your_Best_Model.pt]` with the path to your trained model, e.g., `../runs/detect/my_final_enhanced_model/weights/best.pt`)*
-    * Results will be in `runs/detect/final_evaluation_results/`.
-
----
 
 ## 4. Bonus: Use Case Application
 
