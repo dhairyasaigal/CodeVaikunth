@@ -37,10 +37,9 @@ This highlighted "OxygenTank" detection as our primary focus for optimization.
 
 During our initial evaluation, we identified specific failure cases, particularly for "OxygenTank" and "Toolbox," which motivated our optimization strategy:
 
-* **Image 1 (Fire Extinguisher):** Object mostly out of frame, insufficient features for detection. Extreme top-down perspective not well-represented in training data.
-* **Image 2 (ToolBox):** Object significantly hidden by foreground elements and dense background. Strong glare and reflections obscured object details.
-* **Image 3 (ToolBox):** Bright reflections reduced object visibility and differentiation from background. Object's lying position might be underrepresented in training.
-* **Image 4 (Object Concealed):** Object almost entirely concealed by a large blue cylinder, with only a tiny sliver visible, making identification nearly impossible.
+* **Fire Extinguisher:** Object mostly out of frame, insufficient features for detection. Extreme top-down perspective not well-represented in training data.
+* **ToolBox:** Object significantly hidden by foreground elements and dense background. Strong glare and reflections obscured object details.Bright reflections reduced object visibility and differentiation from background. Object's lying position might be underrepresented in training.
+* **Object Concealed:** Object almost entirely concealed by a large blue cylinder, with only a tiny sliver visible, making identification nearly impossible.
 
 ### 2.4. Solution: Targeted Data Augmentation Strategy
 
@@ -86,18 +85,6 @@ We have developed a basic Python desktop application to demonstrate the practica
     python detection_app.py
     ```
     The app will process images from the configured `TEST_IMAGES_DIR`, display detections, and save results to the `app_detections` folder.
-
-### 4.2. Plan for Keeping the Model Up-to-Date Using Falcon
-
-To ensure our model remains effective in a dynamic space station environment, we propose a continuous improvement loop using Duality AI's Falcon platform:
-
-1.  **Identify Model Drift/New Requirements:** Monitor the deployed application for performance degradation (e.g., missed detections of new equipment models, issues under new lighting).
-2.  **Synthetic Data Generation with Falcon:** Leverage Falcon's digital twin capabilities to simulate and generate new, perfectly labeled synthetic data that specifically addresses the identified challenges (e.g., new object variants, extreme environmental conditions, novel occlusion patterns).
-3.  **Model Retraining/Fine-tuning:** The newly generated synthetic data from Falcon is integrated with our existing dataset. The YOLOv8 model is then retrained or fine-tuned on this expanded, updated dataset.
-4.  **Model Evaluation and Validation:** The updated model is rigorously evaluated to ensure performance gains and prevent regressions.
-5.  **Deployment of Updated Model:** Once validated, the new model weights are deployed to the application.
-
-This Falcon-driven cycle ensures the model continuously adapts to evolving conditions, maintaining high operational safety and efficiency without extensive manual data collection and labeling.
 
 ---
 
